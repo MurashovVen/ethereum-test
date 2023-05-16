@@ -23,7 +23,10 @@ func main() {
 	defer cancelCtx()
 
 	cfg := config{}
-	err := envconfig.Process("APP", &cfg)
+	err := envconfig.Usage("APP", &cfg)
+	panicIfErr("вывод конфигурации в консоль", err)
+
+	err = envconfig.Process("APP", &cfg)
 	panicIfErr("чтение конфигурации", err)
 
 	eg, egCtx := errgroup.WithContext(ctx)
