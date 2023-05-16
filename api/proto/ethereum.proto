@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "../../pkg/grpc";
+
+service Ethereum {
+  // returns wei balance of the provided account
+  rpc BalanceGet(BalanceReq) returns (Balance);
+
+  rpc TransactionSend(TransactionSendReq) returns (TransactionSendResp);
+}
+
+message BalanceReq {
+  // hex encoded address
+  string address = 1;
+}
+
+message Balance {
+  string value = 2;
+}
+
+message TransactionSendReq {
+  // json encoded transaction
+  bytes txBytes = 1;
+}
+
+message TransactionSendResp {}
